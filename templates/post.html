@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../static/img/favicon.ico">
+<title>TLDOG - {{ post.title }}</title>
+<!-- Bootstrap core CSS -->
+<link href="../static/css/bootstrap.min.css" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="../static/css/mediumish.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Begin Nav
+================================================== -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-white fixed-top mediumnavigation">
+<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="container">
+	<!-- Begin Logo -->
+	<a class="navbar-brand" href="/">
+	<img src="../static/img/logo.png" alt="logo">
+	</a>
+	<!-- End Logo -->
+	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+		<!-- Begin Menu -->
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item active">
+	    	{% if current_user.is_authenticated is true %}
+			<a class="nav-link" href="/profile/tilda">Profile</a>
+			</li>
+			{% else %}
+			<li class="nav-item">
+			<a class="nav-link" href="/register">Register</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="/login">Login</a>
+			</li>
+			{% endif %}
+		</ul>
+		<!-- End Menu -->
+		<!-- Begin Search -->
+		<form class="form-inline my-2 my-lg-0">
+			<input class="form-control mr-sm-2" type="text" placeholder="Search">
+			<span class="search-icon"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M20.067 18.933l-4.157-4.157a6 6 0 1 0-.884.884l4.157 4.157a.624.624 0 1 0 .884-.884zM6.5 11c0-2.62 2.13-4.75 4.75-4.75S16 8.38 16 11s-2.13 4.75-4.75 4.75S6.5 13.62 6.5 11z"></path></svg></span>
+		</form>
+		<!-- End Search -->
+	</div>
+</div>
+</nav>
+<!-- End Nav
+================================================== -->
+
+<!-- Begin Article
+================================================== -->
+<div class="container">
+	<div class="row">
+
+		<!-- Begin Fixed Left Share -->
+		<div class="col-md-2 col-xs-12">
+			<div class="share" style="display: block;">
+				<p>
+					Like
+				</p>
+				<ul>
+					<li>
+					<a href="#like">
+					105<br/>
+						<svg id="like" class="ui-lib-mitten-icon _state_passive _theme_default _animation_zoom-in ui-lib-mitten__icon mittens__icon mittens__icon_passive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28"><path transform="" d="M17.2325 9.52697L15.3957 11.7014L21.734 11.7014C22.433 11.7014 22.9992 12.2722 22.9992 13.0269C22.8909 14.7282 22.5743 16.3693 22.0559 17.934C21.3462 20.0711 20.2936 22.0447 18.9366 23.7808L18.7538 24L9 23.9999L9 13.0269L14.7208 6.45065C15.1096 5.95335 15.4056 5.39769 15.6117 4.77676C15.7595 4.3309 15.8502 3.86018 15.8813 3.37195C16.1102 3.14221 16.4257 3 16.7744 3C17.4273 3 17.8719 3.43657 18.1374 4.17983C18.4542 5.06637 18.4265 6.07071 18.4265 6.07071C18.4265 7.37675 17.977 8.57516 17.2325 9.52697Z"></path><path transform="" d="M5.00002 23.9999V13.0269H6.9999L7 23.9999H5.00002Z"></path></svg>
+					</a>
+					</li>
+					<li>
+				</ul>
+				<div class="sep">
+				</div>
+				<p>
+					Dislike
+				</p>
+				<ul>
+					<li>
+					<a href="#dislike">
+					42<br/>
+						<svg id="dislike" class="ui-lib-mitten-icon _state_passive _theme_default _animation_zoom-in ui-lib-mitten__icon mittens__icon mittens__icon_passive" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28"><path transform="translate(28, 28) rotate(180)" d="M17.2325 9.52697L15.3957 11.7014L21.734 11.7014C22.433 11.7014 22.9992 12.2722 22.9992 13.0269C22.8909 14.7282 22.5743 16.3693 22.0559 17.934C21.3462 20.0711 20.2936 22.0447 18.9366 23.7808L18.7538 24L9 23.9999L9 13.0269L14.7208 6.45065C15.1096 5.95335 15.4056 5.39769 15.6117 4.77676C15.7595 4.3309 15.8502 3.86018 15.8813 3.37195C16.1102 3.14221 16.4257 3 16.7744 3C17.4273 3 17.8719 3.43657 18.1374 4.17983C18.4542 5.06637 18.4265 6.07071 18.4265 6.07071C18.4265 7.37675 17.977 8.57516 17.2325 9.52697Z"></path><path transform="translate(28, 28) rotate(180)" d="M5.00002 23.9999V13.0269H6.9999L7 23.9999H5.00002Z"></path></svg>
+					</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- End Fixed Left Share -->
+
+		<!-- Begin Post -->
+		<div class="col-md-8 col-md-offset-2 col-xs-12">
+			<div class="mainheading">
+
+				<!-- Begin Top Meta -->
+				<div class="row post-top-meta">
+					<div class="col-md-2">
+						<a href="author.html"><img class="author-thumb" src="https://www.gravatar.com/avatar/e56154546cf4be74e393c62d1ae9f9d4?s=250&amp;d=mm&amp;r=x" alt="Sal"></a>
+					</div>
+					<div class="col-md-10">
+						<a class="link-dark" href="author.html">Sal</a><a href="#" class="btn follow">Subscribe</a>
+						<span class="post-date">{{ post.date}}</span><span class="dot"></span><span class="post-read">6 min read</span>
+					</div>
+				</div>
+				<!-- End Top Menta -->
+
+				<h1 class="posttitle">{{ post.title }}</h1>
+
+			</div>
+
+			<!-- Begin Featured Image -->
+			<!-- End Featured Image -->
+
+			<!-- Begin Post Content -->
+			<div class="article-post">
+				{{ post.text | safe}}
+				{% if current_user.id == post.creator_id %}
+					<a href="/post/{{ post.id }}/del" class="btn btn-danger" >Удалить</a>
+					<a href="/post/{{ post.id }}/update" class="btn btn-warning" >Редактировать</a>
+				{% else %}
+				{% endif %}
+			</div>
+			<!-- End Post Content -->
+
+		</div>
+		<!-- End Post -->
+
+	</div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- End Twitter Timeline
+================================================== -->
+
+<!-- Begin AlertBar
+================================================== -->
+<!--
+<div class="alertbar">
+	<div class="container text-center">
+		<img src="../static/img/logo.png" alt=""> &nbsp; 
+	</div>
+</div>
+-->
+<!-- End AlertBar
+================================================== -->
+
+<!-- Begin Footer
+================================================== -->
+<div class="container">
+	<div class="footer">
+		<p class="pull-left">
+			 Copyright &copy; 2020 TLDOG
+		</p>
+		<div class="clearfix">
+		</div>
+	</div>
+</div>
+<!-- End Footer
+================================================== -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../static/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="../static/js/ie10-viewport-bug-workaround.js"></script>
+<script src="../static/js/mediumish.js"></script>
+<script>
+let a = 0;
+let b = 0;
+like.onclick = function () {
+	if (a == 0) {
+		like.style.fill = 'black';
+		a = 1;
+		dislike.style.fill = 'gray';
+		b = 0;
+	} else {
+		like.style.fill = 'gray';
+		a = 0;
+	}
+}
+dislike.onclick = function () {
+	if (b == 0) {
+		dislike.style.fill = 'black';
+		b = 1;
+		like.style.fill = 'gray';
+		a = 0;
+	} else {
+		dislike.style.fill = 'gray';
+		b = 0;
+	}
+}
+</script>
+</body>
+</html>
