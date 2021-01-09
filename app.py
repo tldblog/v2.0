@@ -70,18 +70,18 @@ def post_del(id):
     post = Articles.query.get_or_404(id)
 
     try:
-        if post.creator_id == current_user.id:
+        if post.creator_id == current_user.id or 'admin' == current_user.id:
             db.session.delete(post)
             db.session.commit()
         else:
-            return redirect('/posts')
-        return redirect('/posts')
+            return redirect('/')
+        return redirect('/')
     except:
         return 'При удалении произошла ошибка'
     return render_template('post.html', post = post)
 
 @app.route("/create-article", methods=['GET', 'POST'])
-#@login_required
+@login_required
 def create_article():
     if request.method == 'POST':
         title = request.form.get('title')
@@ -91,7 +91,7 @@ def create_article():
         new_article = Articles(title=str(title), intro=intro, text=text, creator_id = current_user.id)
         db.session.add(new_article)
         db.session.commit()
-        return redirect('/posts')
+        return redirect('/')
     else:
         return render_template('create-aricle.html')
 
@@ -147,6 +147,11 @@ def logout():
 @app.errorhandler(404)
 def not_found_error(error):
     return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template('500.html'), 500
+
 '''
 @login_manager.user_loader
 def load_user(user_id):

@@ -32,9 +32,12 @@
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<!-- Begin Menu -->
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item active">
 	    	{% if current_user.is_authenticated is true %}
+			<li class="nav-item active">
 			<a class="nav-link" href="/profile/tilda">Profile</a>
+			</li>
+			<li class="nav-item active">
+			<a class="nav-link" href="/create-article">Create Post</a>
 			</li>
 			{% else %}
 			<li class="nav-item">
@@ -74,32 +77,33 @@
 	<div class="section-title">
 		<h2><span>All Posts</span></h2>
 	</div>
-
+		<div class="cards">
 		{% for el in articles %}
-		<!-- begin post -->
-		<div class="card">
-			<a href="/post/{{ el.id }}">
-				<img class="img-fluid" src="static/img/demopic/5.jpg" alt="">
-			</a>
-			<div class="card-block">
-				<h2 class="card-title"><a href="/post/{{ el.id }}">{{ el.title }}</a></h2>
-				<h4 class="card-text">{{ el.intro | safe }}</h4>
-				<div class="metafooter">
-					<div class="wrapfooter">
-						<span class="meta-footer-thumb">
-						<a href="#"><img class="author-thumb" src="static/img/default.jpg" alt="default"></a>
-						</span>
-						<span class="author-meta">
-						<span class="post-name"><a href="#">Sal</a></span><br/>
-						<span class="post-date">{{ el.date }}</span><span class="dot"></span><span class="post-read">6 min read</span>
-						</span>
-						<span class="post-read-more"><a href="/post/{{ el.id }}" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
+			<!-- begin post -->
+			<div class="card">
+				<a href="/post/{{ el.id }}">
+					<img class="img-fluid" src="static/img/demopic/5.jpg" alt="">
+				</a>
+				<div class="card-block">
+					<h2 class="card-title"><a href="/post/{{ el.id }}">{{ el.title }}</a></h2>
+					<h4 class="card-text">{{ el.intro | safe }}</h4>
+					<div class="metafooter">
+						<div class="wrapfooter">
+							<span class="meta-footer-thumb">
+							<a href="#"><img class="author-thumb" src="static/img/default.jpg" alt="default"></a>
+							</span>
+							<span class="author-meta">
+							<span class="post-name"><a href="#">Sal</a></span><br/>
+							<span class="post-date">{{ el.date }}</span><span class="dot"></span><span class="post-read">6 min read</span>
+							</span>
+							<span class="post-read-more"><a href="/post/{{ el.id }}" title="Read Story"><svg class="svgIcon-use" width="25" height="25" viewbox="0 0 25 25"><path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z" fill-rule="evenodd"></path></svg></a></span>
+						</div>
 					</div>
 				</div>
 			</div>
+			<!-- end post -->
+			{% endfor %}
 		</div>
-		<!-- end post -->
-		{% endfor %}
 	</div>
 	</section>
 	<!-- End List Posts
@@ -128,14 +132,6 @@
 <script src="static/js/bootstrap.min.js"></script>
 <script src="static/js/ie10-viewport-bug-workaround.js"></script>
 <style>
-	.card {
-		margin: 2px;
-		margin-top: 20px;
-		max-width: 320px;
-		min-height: 500px;
-		max-height: 500px;
-		display: inline-flex;
-	}
 	.card h4 {
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -147,10 +143,18 @@
 		width: 100%;
 		max-height: 200px;
 	}
-	/*.wrapfooter {
-		display: table-cell;
-    	vertical-align: bottom;
-	}*/
+	.cards {
+		text-align: center;
+	}
+	.card {
+		margin: 2px;
+		margin-top: 20px;
+		max-width: 320px;
+		min-height: 500px;
+		max-height: 500px;
+		display: inline-flex;
+		text-align: left;
+	}
 </style>
 </body>
 </html>

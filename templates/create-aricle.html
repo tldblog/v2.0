@@ -34,21 +34,23 @@
       </div>
       <input type="text" style="display: none;" value="Текст" id="text">
       <div class="btn" onclick="public()">Public</div>
-      <input type="submit" style="display: none;" value="Текст" id="btn" name="text">
+      <div id="xd">
+        <input type="submit" style="display: none;" value="Текст" id="btn" name="text">
+      </div>
     </form>
     <script>
         DecoupledEditor
             .create( document.querySelector( '#editor' ) )
             .then( editor => {
                 const toolbarContainer = document.querySelector( '#toolbar-container' );
-
                 toolbarContainer.appendChild( editor.ui.view.toolbar.element );
             } )
             .catch( error => {
                 console.error( error );
             } );
         function public () {
-          text.value = editor.innerHTML;
+          text = editor.innerHTML.replace(/<script>/, '&lt;script&gt;')
+          xd.innerHTML = `<input type="submit" style="display: none;" value="${editor.innerHTML}" id="btn" name="text">`
           btn.click();
         }
     </script>

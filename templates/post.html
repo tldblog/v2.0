@@ -26,15 +26,18 @@
 <div class="container">
 	<!-- Begin Logo -->
 	<a class="navbar-brand" href="/">
-	<img src="../static/img/logo.png" alt="logo">
+	<img src="../static/img/logo.png" alt="logo"><span style="margin-left: -5px;">ldog</span>
 	</a>
 	<!-- End Logo -->
 	<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 		<!-- Begin Menu -->
 		<ul class="navbar-nav ml-auto">
-			<li class="nav-item active">
 	    	{% if current_user.is_authenticated is true %}
+			<li class="nav-item active">
 			<a class="nav-link" href="/profile/tilda">Profile</a>
+			</li>
+			<li class="nav-item active">
+			<a class="nav-link" href="/create-article">Create Post</a>
 			</li>
 			{% else %}
 			<li class="nav-item">
