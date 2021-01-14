@@ -3,16 +3,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>TLDOG - Создай пост</title>
-    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/decoupled-document/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/balloon/ckeditor.js"></script>
     <style>
+      * {
+        box-sizing: border-box;
+      }
       body {
         text-align: center;
 	      justify-content: center;
       }
-      input {
-        width: 90%;
-        padding: 5px;
-        margin: 10px;
+      input, input:hover, input:focus {
+        width: 100%;
+        padding: 20px;
+        border: none;
+      }
+      :focus {
+        border: none;
       }
       .all {
         margin: 0;
@@ -21,25 +27,33 @@
       #editor {
         height: 500px;
       }
+      .btn {
+        position: relative;
+      }
     </style>
 </head>
 <body>
+    <div style="width: 100%;text-align: left;">
+      <a href="/"><img src="static/img/left.png" width="30px" alt="arr"></a>
+      <a href="#" style="margin-left: calc(100% - 70px);" onclick="help()"><img src="static/img/q.png" width="30px" alt="arr"></a>
+    </div>
     <form method="post">
-      <input type="text" max="20" min="3" placeholder="Название поста" required name="title">
+      <input type="text" max="20" min="3" placeholder="Название поста" required name="title" autocomplete="off">
       <div class="all">
         <div id="toolbar-container"></div>
         <div id="editor">
             <p>В этом посте я расскажу о ...</p>
         </div>
       </div>
-      <input type="text" style="display: none;" value="Текст" id="text">
-      <div class="btn" onclick="public()">Public</div>
-      <div id="xd">
-        <input type="submit" style="display: none;" value="Текст" id="btn" name="text">
-      </div>
+      <textarea id="edit" name="text" style="display: none;"></textarea>
+      <div class="fix"><button class="button" style="vertical-align:middle" onclick="public()"><span>Public </span></button></div>
     </form>
+    <div class="help">
+      <h2>Создай пост:</h2>
+      <p>Заполни два поля, название поста, и само содержание поста, для форматирования текста просто выдели его!</p>
+    </div>
     <script>
-        DecoupledEditor
+        let editor = BalloonEditor
             .create( document.querySelector( '#editor' ) )
             .then( editor => {
                 const toolbarContainer = document.querySelector( '#toolbar-container' );
@@ -47,107 +61,66 @@
             } )
             .catch( error => {
                 console.error( error );
-            } );
+        } );
         function public () {
-          text = editor.innerHTML.replace(/<script>/, '&lt;script&gt;')
-          xd.innerHTML = `<input type="submit" style="display: none;" value="${editor.innerHTML}" id="btn" name="text">`
+          text = editor.getData().replace(/<script/, '&lt;script');
+          edit.innerTEXT = '';
+          edit.innerTEXT = '' + text;
           btn.click();
+        }
+        function help () {
+          alert('Зачем тебе помощь? Заполни два поля(для форматирования содержимого поста выдели его), и нажми на конпку Public');
         }
     </script>
     <style>
-@import url('https://fonts.googleapis.com/css?family=Dosis');
-
-
-:root{
-	--height: 3em;
-	--bgr: rgb(64, 64, 64);
-}
-
-.btn{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: absolute;
-	cursor: pointer;
-	color: white;
-	background: var(--bgr);
-	height: calc(1 * var(--height));
-	width: calc(2 * 0.866 * var(--height));
-	box-shadow: 0.5em 0.5em 0.5em lightgrey;
-	transition: box-shadow ease 0.2s;
-	z-index: 9;
-  margin: 0;
+.fix {
+  position: fixed;
+  bottom: 0;
   text-align: center;
+  width: 100%;
+}
+.help {
+  display: none;
+}
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #6d6c6c;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 14px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 3px;
 }
 
-.btn:after, 
-.btn:before{
-	content: '';
-	position: absolute;
-	transition: all ease-in-out 0.35s;
-	top: 0px; left: 0px;
-	height: calc(1 * var(--height));
-	width: calc(2 * 0.866 * var(--height));
-	background: var(--bgr);
-	opacity: 0;
-	z-index: -5;
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
 }
 
-.btn:hover{
-	transition: box-shadow linear 0.2s;
-	box-shadow: none;
-}
-.btn:after{
-	transform: rotate(60deg) translateX(calc(-2 * var(--height)));
-}
-
-.btn:before{
-	transform: rotate(-60deg) translateX(calc(2 * var(--height)));
-	transition-delay: 0.1s;
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
 }
 
-.btn:hover:after,
-.btn:hover:before{
-	content: '';
-	position: absolute;
-	top: 0px; left: 0px;
-	transition: all ease-in-out .2s;
-	height: calc(1 * var(--height));
-	width: calc(2 * 0.866 * var(--height));
-	background: var(--bgr);
-	opacity: 1;
-	z-index: -5;
+.button:hover span {
+  padding-right: 25px;
 }
 
-.btn:hover:after{
-	transform: rotate(60deg) translateX(0);
-	
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
 }
-
-.btn:hover:before{
-	transform:  rotateZ(-60deg) translateX(0px);
-	transition-delay: 0.1s;
-}
-
-.btn:active:before,
-.btn:active:after{
-	transform: rotateZ(0deg);
-}
-
-.btn:active:before{
-	transition-delay: .1s;
-}
-
-.footer{
-	position: fixed;
-	bottom: 0px; right: 0px; 
-	margin: 3px; 
-	font-size: 11px;
-}
-
-a{
-	text-decoration: none; 
-}
-    </style>
+</style>
 </body>
 </html>
