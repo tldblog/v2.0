@@ -47,30 +47,32 @@
       </div>
       <textarea id="edit" name="text" style="display: none;"></textarea>
       <div class="fix"><button class="button" style="vertical-align:middle" onclick="public()"><span>Public </span></button></div>
+      <input type="submit" id="btn" style="display: none;">
     </form>
     <div class="help">
       <h2>Создай пост:</h2>
       <p>Заполни два поля, название поста, и само содержание поста, для форматирования текста просто выдели его!</p>
     </div>
     <script>
-        let editor = BalloonEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( editor => {
-                const toolbarContainer = document.querySelector( '#toolbar-container' );
-                toolbarContainer.appendChild( editor.ui.view.toolbar.element );
-            } )
-            .catch( error => {
-                console.error( error );
-        } );
-        function public () {
-          text = editor.getData().replace(/<script/, '&lt;script');
-          edit.innerTEXT = '';
-          edit.innerTEXT = '' + text;
-          btn.click();
-        }
-        function help () {
-          alert('Зачем тебе помощь? Заполни два поля(для форматирования содержимого поста выдели его), и нажми на конпку Public');
-        }
+      let Editor;
+      BalloonEditor
+          .create( document.querySelector( '#editor' ) )
+          .then( editor => {
+              Editor = editor;
+          } )
+          .catch( error => {
+              console.error( error );
+      } );
+      function public () {
+        text = Editor.getData().replace(/<script/, '&lt;script');
+        text = Editor.getData().replace(/<iframe/, '&lt;iframe');
+        edit.innerTEXT = '';
+        edit.innerTEXT = '' + text;
+        btn.click();
+      }
+      function help () {
+        alert('Зачем тебе помощь? Заполни два поля(для форматирования содержимого поста выдели его), и нажми на конпку Public');
+      }
     </script>
     <style>
 .fix {
