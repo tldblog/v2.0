@@ -68,6 +68,8 @@
         text = Editor.getData().replace(/<iframe/, '&lt;iframe');
         edit.innerTEXT = '';
         edit.innerTEXT = '' + text;
+        edit.innerHTML = '';
+        edit.innerHTML = '' + text;
         btn.click();
       }
       function help () {

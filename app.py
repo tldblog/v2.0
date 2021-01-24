@@ -44,6 +44,10 @@ def index():
 
     return render_template('index.html', articles=list(reversed(posts)))
 
+@app.route("/runner")
+def runner():
+    return render_template('run/index.html')
+
 @app.route("/profile/<username>")
 @login_required
 def get_profile(username):
